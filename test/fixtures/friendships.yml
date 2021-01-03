@@ -1,0 +1,23 @@
+friendship_1_5:
+  user_id: 1
+  friend_id: 5
+  created_at: <%= 32.hours.from_now.to_s :db %>
+  updated_at: <%= 32.hours.from_now.to_s :db %>
+
+friendship_1_6:
+  user_id: 1
+  friend_id: 6
+  created_at: <%= 32.hours.from_now.to_s :db %>
+  updated_at: <%= 32.hours.from_now.to_s :db %>
+
+friendship_2_3:
+  user_id: 2
+  friend_id: 3
+  created_at: <%= 32.hours.from_now.to_s :db %>
+  updated_at: <%= 32.hours.from_now.to_s :db %>
+
+friendship_3_4:
+  user_id: 3
+  friend_id: 4
+  created_at: <%= 32.hours.from_now.to_s :db %>
+  updated_at: <%= 32.hours.from_now.to_s :db %>
