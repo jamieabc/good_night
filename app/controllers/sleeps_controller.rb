@@ -17,7 +17,7 @@ class SleepsController < ApplicationController
   def list_friends
     render json: {
       message: @user.friend_sleeps
-                    .group_by { |u| u.user_id}
+                    .group_by { |u| u.user_id }
     }
   end
 
