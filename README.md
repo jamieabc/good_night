@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+We require some restful APIS to achieve the following:
 
-Things you may want to cover:
+1. Clock In operation, and return all clocked-in times, ordered by created time.
+2. Users can follow and unfollow other users.
+3. See the sleep records over the past week for their friends, ordered by the length of their sleep.
 
-* Ruby version
+Please implement the model, db migrations, and JSON API.
+You can assume that there are only two fields on the users “id” and “name”.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You do not need to implement any user registration API.
