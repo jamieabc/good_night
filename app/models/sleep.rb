@@ -1,5 +1,6 @@
 class Sleep < ApplicationRecord
   belongs_to :user
+  self.ignored_columns = %w(created_at updated_at)
 
   def index
   end
