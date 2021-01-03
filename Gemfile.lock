@@ -91,6 +91,7 @@ GEM
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    pg (1.2.3)
     puma (5.1.1)
       nio4r (~> 2.0)
     rack (2.2.3)
@@ -150,6 +151,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   listen (~> 3.3)
+  pg
   puma (~> 5.0)
   rails (~> 6.1.0)
   spring
