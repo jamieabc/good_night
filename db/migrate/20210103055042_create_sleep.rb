@@ -8,6 +8,8 @@ class CreateSleep < ActiveRecord::Migration[6.1]
       t.belongs_to :user
 
       t.timestamps
+
+      add_index :sleeps, :user_id
     end
   end
 end
