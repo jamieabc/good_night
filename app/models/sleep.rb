@@ -1,0 +1,6 @@
+class Sleep < ApplicationRecord
+  belongs_to :user
+
+  def index
+  end
+end
