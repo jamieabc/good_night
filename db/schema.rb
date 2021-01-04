@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 2021_01_03_055042) do
   end
 
   create_table "sleeps", force: :cascade do |t|
+    t.bigint "user_id"
     t.datetime "from", null: false
     t.datetime "to", null: false
     t.integer "duration", null: false
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["duration"], name: "index_sleeps_on_duration"
