@@ -5,8 +5,6 @@ class CreateFriendship < ActiveRecord::Migration[6.1]
       t.belongs_to :friend, class: 'User', index: true
 
       t.timestamps
-
-      add_index :friendships, :user_id
     end
   end
 end
