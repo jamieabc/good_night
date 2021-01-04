@@ -1,0 +1,21 @@
+sleep_1:
+  from: <%= 84.hours.from_now.to_s :db %>
+  to: <%= 84.hours.from_now.to_s :db %>
+  duration: 12345
+  created_at: <%= 76.hours.from_now.to_s :db %>
+  user_id: 1
+
+sleep_2:
+  from: <%= 50.hours.from_now.to_s :db %>
+  to: <%= 50.hours.from_now.to_s :db %>
+  duration: 246
+  created_at: <%= 45.hours.from_now.to_s :db %>
+  user_id: 1
+
+sleep_3:
+  from: <%= 30.hours.from_now.to_s :db %>
+  to: <%= 30.hours.from_now.to_s :db %>
+  duration: 987
+  created_at: <%= 22.hours.from_now.to_s :db %>
+  user_id: 1
+
