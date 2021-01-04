@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/sleeps/friends', to: 'sleeps#list_friends'
 
   post '/sleeps', to: 'sleeps#create'
-  post 'users/friends/:friend_id', to: 'users#follow'
+  post '/users/friends/:friend_id', to: 'users#follow'
 
   delete '/users/friends/:friend_id', to: 'users#unfollow'
 end
