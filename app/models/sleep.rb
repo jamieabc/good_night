@@ -1,10 +1,12 @@
 class Sleep < ApplicationRecord
   belongs_to :user
-  self.ignored_columns = %w(created_at updated_at)
 
   validates :from, presence: true
   validates :to, presence: true
   validates :duration, presence: true
+
+  scope :week_earlier, -> { where("sleeps.from between ? and ?",
+                                  Time.now-7.day, Time.now) }
 
   def index
   end
