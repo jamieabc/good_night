@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     end
 
     f.save
-    render json: { mesage: 'ok' }
+    render json: { message: 'ok' }
   end
 
   def unfollow
