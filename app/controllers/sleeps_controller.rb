@@ -6,7 +6,8 @@ class SleepsController < ApplicationController
     from, to = Time.parse(from), Time.parse(to)
 
     if from >= to
-      return render json: { error: 'sleep time incorrect, from should be earlier than to' }
+      render json: { error: 'sleep time incorrect, from should be earlier than to' }
+      return
     end
 
     Sleep.create(user_id: user_id, from: from, to: to, duration: to - from)
@@ -17,6 +18,7 @@ class SleepsController < ApplicationController
   def list_friends
     render json: {
       message: @user.friend_sleeps
+                    .week_earlier
                     .group_by { |u| u.user_id }
     }
   end
