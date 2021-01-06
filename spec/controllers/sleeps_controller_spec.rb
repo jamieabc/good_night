@@ -65,16 +65,20 @@ RSpec.describe SleepsController, type: :request do
       user1, user2 = User.find(1), User.find(2)
       now = Time.now
 
-      Sleep.create(user_id: user2.id, from: now-10.days, to: now-9.days, duration: 1.day)
+      outdated = Sleep.create(user_id: user2.id, from: now-10.days, to: now-9.days,
+                          duration: 1.day)
       shorter = Sleep.create(user_id: user2.id, from: now - 8.hour, to: now - 1.hour, duration: 1.hour)
       longer = Sleep.create(user_id: user2.id, from: now - 8.hour, to: now, duration: 8.hour)
+
       Friendship.create(user_id: user1.id, friend_id: user2.id)
       original_size = User.find(user1.id).friend_sleeps.size
 
       get '/sleeps/friends', params: { user: user1.id }
       resp = JSON.parse(response.body)
 
-      expect(resp["friends"][user2.id.to_s].size).to be(original_size-1)
+      expect(resp["friends"][user2.id.to_s].size).to be(original_size-1) # 1 outdated
+
+      # order by duration asc
       expect(resp["friends"][user2.id.to_s][0]["duration"]).to be(shorter.duration.to_i)
       expect(resp["friends"][user2.id.to_s][1]["duration"]).to be(longer.duration.to_i)
     end
