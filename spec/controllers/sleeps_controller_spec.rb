@@ -4,15 +4,13 @@ RSpec.describe SleepsController, type: :request do
   invalid_user_id = 100
   fixtures :users
 
-  describe "#before_action" do
+  describe "Post #create" do
     it "error if user not exist" do
       get '/sleeps/friends', params: { user: invalid_user_id }
 
-      expect(JSON.parse(response.body)["error"]).to be_truthy
+      expect(JSON.parse(response.body)["errors"]).to be_truthy
     end
-  end
 
-  describe "Post #create" do
     it "error if wrong time format" do
       user = User.find(1)
 
@@ -22,7 +20,7 @@ RSpec.describe SleepsController, type: :request do
         to: "to"
       }
 
-      expect(JSON.parse(response.body)["error"]).to be_truthy
+      expect(JSON.parse(response.body)["errors"]).to be_truthy
     end
 
     it "error if sleep start time later than end time" do
@@ -34,7 +32,7 @@ RSpec.describe SleepsController, type: :request do
         to: Time.now - 16.hour,
       }
 
-      expect(JSON.parse(response.body)["error"]).to be_truthy
+      expect(JSON.parse(response.body)["errors"]).to be_truthy
     end
 
     it "return sleep time order by creation" do
@@ -63,7 +61,7 @@ RSpec.describe SleepsController, type: :request do
   end
 
   describe "Get #list_friends" do
-    it "return friends last week sleep time by duration" do
+    it "return last week friend sleep time order by duration asc" do
       user1, user2 = User.find(1), User.find(2)
       now = Time.now
 
@@ -76,9 +74,9 @@ RSpec.describe SleepsController, type: :request do
       get '/sleeps/friends', params: { user: user1.id }
       resp = JSON.parse(response.body)
 
-      expect(resp["message"][user2.id.to_s].size).to be(original_size-1)
-      expect(resp["message"][user2.id.to_s][0]["duration"]).to be(1.hour.to_i)
-      expect(resp["message"][user2.id.to_s][1]["duration"]).to be(8.hour.to_i)
+      expect(resp["friends"][user2.id.to_s].size).to be(original_size-1)
+      expect(resp["friends"][user2.id.to_s][0]["duration"]).to be(1.hour.to_i)
+      expect(resp["friends"][user2.id.to_s][1]["duration"]).to be(8.hour.to_i)
     end
   end
 end

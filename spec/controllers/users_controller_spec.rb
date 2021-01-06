@@ -7,14 +7,14 @@ RSpec.describe UsersController, type: :request do
     it "error if user not exist" do
       post '/users/friends/1', params: { user: invalid_user_id }
 
-      expect(JSON.parse(response.body)["error"]).to be_truthy
+      expect(JSON.parse(response.body)["errors"]).to be_truthy
     end
 
     it "error if friend not exist" do
       user = User.find(1)
 
       post "/users/friends/#{invalid_user_id}", params: { user: user.id }
-      expect(JSON.parse(response.body)["error"]).to be_truthy
+      expect(JSON.parse(response.body)["errors"]).to be_truthy
     end
   end
 
