@@ -6,7 +6,7 @@ class SleepsController < ApplicationController
     from, to = Time.parse(from), Time.parse(to)
 
     if from >= to
-      render json: { error: 'sleep time incorrect, from should be earlier than to' }
+      render json: { error: ErrorMessage::Sleep.invalid_from }
       return
     end
 
@@ -27,13 +27,13 @@ class SleepsController < ApplicationController
 
   def find_user
     if params[:user].blank?
-      return render json: { error: 'user id not exist' }
+      return render json: { error: ErrorMessage::User.id_not_exist }
     end
 
     begin
       @user = User.find(params[:user])
     rescue
-      render json: { error: 'user not exist' }
+      render json: { error: ErrorMessage::User.not_exist }
     end
   end
 end

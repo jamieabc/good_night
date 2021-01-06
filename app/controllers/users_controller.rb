@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     f = Friendship.new(user_id: @user.id, friend_id: friend_id)
 
     unless f.valid?
-      return render json: { error: 'friend not exist' }
+      return render json: { error: ErrorMessage::Friend.invalid }
     end
 
     f.save
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     f = Friendship.find_by(user_id: @user.id, friend_id: friend_id)
 
     if f.nil?
-      return render json: { error: 'you are not friends' }
+      return render json: { error: ErrorMessage::Friend.not_friends }
     end
 
     f.destroy
@@ -30,13 +30,13 @@ class UsersController < ApplicationController
 
   def find_user
     if params[:user].blank?
-      return render json: { error: 'user id not exist' }
+      return render json: { error: ErrorMessage::User.id_not_exist }
     end
 
     begin
       @user = User.find(params[:user])
     rescue
-      render json: { error: 'user not exist' }
+      render json: { error: ErrorMessage::User.not_exist }
     end
   end
 end
