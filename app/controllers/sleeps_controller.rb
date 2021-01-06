@@ -3,7 +3,7 @@ class SleepsController < ApplicationController
     begin
       user_id, from, to = params.require([:user, :from, :to])
     rescue ActionController::ParameterMissing => e
-      render json: { error: e.to_s }
+      render json: { error: e }
       return
     end
 
@@ -24,17 +24,17 @@ class SleepsController < ApplicationController
   end
 
   def list_friends
-    user = User.find(params[:user])
-
-    if user.nil?
-      render json: failed_json.merge(errors: ErrorMessage::User.not_exist)
+    begin
+      user = User.find(params[:user])
+    rescue => e
+      render json: failed_json.merge(errors: e)
       return
     end
 
     render json: success_json.merge({
                                       friends: user.friend_sleeps
-                                                  .week_earlier
-                                                  .group_by { |u| u.user_id }
+                                                   .week_earlier
+                                                   .group_by { |u| u.user_id }
                                     })
   end
 end
