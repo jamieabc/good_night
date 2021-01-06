@@ -38,7 +38,7 @@ RSpec.describe SleepsController, type: :request do
     it "return sleep time order by creation" do
       user = User.find(1)
 
-      later_sleep = Sleep.create(
+      later = Sleep.create(
         user_id: user.id,
         from: Time.now - 16.hour,
         to: Time.now - 8.hour,
@@ -56,7 +56,7 @@ RSpec.describe SleepsController, type: :request do
       resp = JSON.parse(response.body)
 
       expect(resp["message"].size).to be(size + 1)
-      expect(resp["message"][1]["duration"]).to be(later_sleep.duration)
+      expect(resp["message"][1]["duration"]).to be(later.duration)
     end
   end
 
