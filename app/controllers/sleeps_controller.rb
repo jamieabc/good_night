@@ -3,7 +3,7 @@ class SleepsController < ApplicationController
     begin
       user_id, from, to = params.require([:user, :from, :to])
     rescue ActionController::ParameterMissing => e
-      render json: { error: e }
+      render json: failed_json.merge(errors: e)
       return
     end
 
