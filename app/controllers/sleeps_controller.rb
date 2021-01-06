@@ -2,8 +2,21 @@ class SleepsController < ApplicationController
   before_action :find_user
 
   def create
-    user_id, from, to = params.require([:user, :from, :to])
-    from, to = Time.parse(from), Time.parse(to)
+    begin
+      user_id, from, to = params.require([:user, :from, :to])
+    rescue ActionController::ParameterMissing => e
+      render json: {
+        error: e
+      }
+      return
+    end
+
+    begin
+      from, to = Time.parse(from), Time.parse(to)
+    rescue ArgumentError
+      render json: { error: ErrorMessage::Sleep.invalid_time_format }
+      return
+    end
 
     if from >= to
       render json: { error: ErrorMessage::Sleep.invalid_from }

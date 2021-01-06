@@ -30,6 +30,10 @@ class ErrorMessage
       def invalid_from
         "sleep from should be earlier than to"
       end
+
+      def invalid_time_format
+        "invalid time format"
+      end
     end
   end
 end

@@ -13,6 +13,18 @@ RSpec.describe SleepsController, type: :request do
   end
 
   describe "Post #create" do
+    it "error if wrong time format" do
+      user = User.find(1)
+
+      post '/sleeps', params: {
+        user: user.id,
+        from: "from",
+        to: "to"
+      }
+
+      expect(JSON.parse(response.body)["error"]).to be_truthy
+    end
+
     it "error if sleep start time later than end time" do
       user = User.find(1)
 
