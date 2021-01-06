@@ -2,15 +2,21 @@ class UsersController < ApplicationController
   before_action :find_user
 
   def follow
-    friend_id = params.require(:friend_id)
-    f = Friendship.new(user_id: @user.id, friend_id: friend_id)
-
-    unless f.valid?
-      return render json: { error: ErrorMessage::Friend.invalid }
+    begin
+      friend_id = params.require(:friend_id)
+    rescue ActionController::ParameterMissing => e
+      render json: { error: e }
+      return
     end
 
-    f.save
-    render json: { message: 'ok' }
+    f = Friendship.new(user_id: @user.id, friend_id: friend_id)
+
+    if f.save
+      render json: success_json
+      return
+    end
+
+    render json: { error: ErrorMessage::Friend.invalid }
   end
 
   def unfollow
@@ -23,7 +29,7 @@ class UsersController < ApplicationController
 
     f.destroy
 
-    render json: { message: 'ok' }
+    render json: success_json
   end
 
   private
