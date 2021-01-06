@@ -5,9 +5,7 @@ class SleepsController < ApplicationController
     begin
       user_id, from, to = params.require([:user, :from, :to])
     rescue ActionController::ParameterMissing => e
-      render json: {
-        error: e
-      }
+      render json: { error: e }
       return
     end
 
@@ -18,14 +16,13 @@ class SleepsController < ApplicationController
       return
     end
 
-    if from >= to
-      render json: { error: ErrorMessage::Sleep.invalid_from }
+    sleep = Sleep.new(user_id: user_id, from: from, to: to, duration: to - from)
+    if sleep.save
+      render json: { message: Sleep.list_user(user_id) }
       return
     end
 
-    Sleep.create(user_id: user_id, from: from, to: to, duration: to - from)
-
-    render json: { message: Sleep.list_user(user_id) }
+    render json: { error: sleep.errors }
   end
 
   def list_friends

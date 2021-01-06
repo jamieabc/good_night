@@ -4,6 +4,7 @@ class Sleep < ApplicationRecord
   validates :from, presence: true
   validates :to, presence: true
   validates :duration, presence: true
+  validates :duration, numericality: { greater_than: 0 }
 
   scope :week_earlier, -> { where("sleeps.from between ? and ?",
                                   Time.now-7.day, Time.now) }
