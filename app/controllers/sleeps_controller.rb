@@ -10,7 +10,7 @@ class SleepsController < ApplicationController
     begin
       from, to = Time.parse(from), Time.parse(to)
     rescue ArgumentError => e
-      render json: failed_json.merge(errors: e.to_s)
+      render json: failed_json.merge(errors: e)
       return
     end
 
