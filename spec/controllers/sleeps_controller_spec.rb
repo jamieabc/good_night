@@ -65,8 +65,8 @@ RSpec.describe SleepsController, type: :request do
       user1, user2 = User.find(1), User.find(2)
       now = Time.now
 
-      outdated = Sleep.create(user_id: user2.id, from: now-10.days, to: now-9.days,
-                          duration: 1.day)
+      outdated = Sleep.create(user_id: user2.id, from: now-200.hour, to: now-190.hour,
+                          duration: 10.hour)
       shorter = Sleep.create(user_id: user2.id, from: now - 8.hour, to: now - 1.hour, duration: 1.hour)
       longer = Sleep.create(user_id: user2.id, from: now - 8.hour, to: now, duration: 8.hour)
 
