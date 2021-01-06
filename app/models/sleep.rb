@@ -7,7 +7,7 @@ class Sleep < ApplicationRecord
   validates :duration, numericality: { greater_than: 0 }
 
   scope :week_earlier, -> { where("sleeps.from between ? and ?",
-                                  Time.now-7.day, Time.now) }
+                                  Time.now - 7.day, Time.now) }
 
   def index
   end
